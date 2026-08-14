@@ -43,17 +43,34 @@ until `js/config.js` has real Supabase values.
 
 ## Verifying RLS is locked down
 
-With your real project URL/anon key, confirm reads/deletes are blocked:
+New tables on Supabase need two things before the anon key can use them:
+a table-level `GRANT` (see the bottom of `schema.sql`) and the RLS
+policy. Without the `GRANT`, PostgREST returns `401 permission denied
+for table` for every operation, including legitimate inserts — that's
+not RLS, that's a missing grant, so don't mistake one for the other.
+
+With your real project URL/anon key, confirm inserts work and
+reads/deletes are blocked:
 
 ```bash
+# INSERT should succeed (201) — use return=minimal, matching what
+# supabase-js's insert() sends by default. return=representation would
+# also require SELECT privilege (to read the row back), which we
+# deliberately don't grant, and would 401 even though the insert itself
+# is fine.
+curl -X POST "https://<project>.supabase.co/rest/v1/leads" \
+  -H "apikey: <anon-key>" \
+  -H "Authorization: Bearer <anon-key>" \
+  -H "Content-Type: application/json" \
+  -H "Prefer: return=minimal" \
+  -d '{"name":"Test","phone":"555-0100","email":"test@example.com"}'
+
+# SELECT and DELETE should both fail with 401 permission denied for table
 curl "https://<project>.supabase.co/rest/v1/leads?select=*" \
   -H "apikey: <anon-key>" \
   -H "Authorization: Bearer <anon-key>"
 ```
 
-This should not return existing row data (Supabase/PostgREST typically
-returns an empty `[]` when no SELECT policy exists, rather than a
-401/403 — RLS silently filters to zero rows). A DELETE request with the
-same headers should likewise have no effect. A test INSERT (e.g. via the
-live form) should still succeed — confirming the anon key and connection
-are fine, and it's the policy, not the key, restricting reads/deletes.
+A successful INSERT alongside blocked SELECT/DELETE confirms the anon
+key and connection are fine, and it's the grants/policy — not a broken
+key — restricting reads/deletes.
