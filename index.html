@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TODO: Page Title</title>
+<meta name="description" content="TODO: meta description for social/ad previews">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============================================================
+     PART 1 — Personal connection / trust-building opening hook
+     TODO: replace with real copy from the user's VSL structure
+     ============================================================ -->
+<section class="section hero" id="hook">
+  <div class="container">
+    <h1>TODO: Hook headline goes here</h1>
+    <p class="lede">TODO: One or two sentences establishing who you are and why the visitor should keep reading/watching.</p>
+    <!-- Optional: <video> or hero image can go here -->
+  </div>
+</section>
+
+<!-- ============================================================
+     PART 2 — Client examples / results, presented subtly
+     TODO: replace with real client examples/results
+     ============================================================ -->
+<section class="section proof" id="proof">
+  <div class="container">
+    <h2>TODO: Proof section heading</h2>
+
+    <div class="proof-grid">
+      <article class="proof-card">
+        <p class="proof-quote">TODO: client result / quote #1</p>
+        <p class="proof-attribution">TODO: name / context</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-quote">TODO: client result / quote #2</p>
+        <p class="proof-attribution">TODO: name / context</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-quote">TODO: client result / quote #3</p>
+        <p class="proof-attribution">TODO: name / context</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PART 3 — Soft CTA + social proof + lead capture form
+     ============================================================ -->
+<section class="section cta" id="cta">
+  <div class="container">
+    <h2>TODO: Soft CTA heading</h2>
+    <p class="lede">TODO: low-pressure invitation copy leading into the form.</p>
+
+    <form id="lead-form" novalidate>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+        <span class="field-error" data-error-for="name"></span>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+        <span class="field-error" data-error-for="phone"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+        <span class="field-error" data-error-for="email"></span>
+      </div>
+
+      <!-- Honeypot field: hidden from real users, left for bots to fill in.
+           Visually hidden (not display:none) so crude bots that skip
+           display:none fields still fall for it. -->
+      <div class="hp-field-wrap" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" id="submit-btn">TODO: CTA button text</button>
+
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="social-proof-strip">
+      TODO: short social-proof line (e.g. "Join 200+ clients who...")
+    </div>
+  </div>
+</section>
+
+<script src="js/config.js"></script>
+<script type="module" src="js/form.js"></script>
+</body>
+</html>
