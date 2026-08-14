@@ -1,84 +1,269 @@
 /* Mobile-first base styles. Adjust colors/fonts/spacing to match the
    final brand once real copy/assets are supplied. */
 
+:root {
+  --color-bg: #0D0D0F;
+  --color-bg-card: #1A1A1E;
+  --color-text: #F5F5F0;
+  --color-text-secondary: #9A9A9F;
+  --color-accent: #C6FF3D;
+  --color-accent-hover: #FF5A36;
+  --color-border: rgba(245, 245, 240, 0.15);
+  --font-primary: "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #1a1a1a;
-  background: #ffffff;
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background: var(--color-bg);
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 640px;
-  margin: 0 auto;
-  padding: 0 20px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.container--wide {
+  max-width: 960px;
 }
 
 .section {
-  padding: 48px 0;
+  position: relative;
+  padding-block: 48px;
+}
+
+/* --- Decorative 3D-style background layer ---
+   Purely ambient: low-opacity, pointer-events:none, sits behind the
+   content layer (.container is z-index:1, this is z-index:0). CSS-only
+   3D (perspective + rotate), no WebGL. Static tilt and scroll-linked
+   parallax are composed via two separate custom properties so JS never
+   has to read-and-reappend `transform` (which would compound wrong). */
+.decor-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--color-accent);
+}
+
+.decor-shape {
+  position: absolute;
+  opacity: 0.12;
+  transform: perspective(600px) var(--tilt, none) translateY(var(--parallax-y, 0px));
+}
+
+.decor-camera {
+  inset-inline-end: 6%;
+  inset-block-start: 10%;
+}
+
+.decor-graph {
+  inset-inline-start: 4%;
+  inset-block-end: 8%;
+}
+
+[dir="rtl"] .decor-graph {
+  transform: perspective(600px) var(--tilt, none) translateY(var(--parallax-y, 0px)) scaleX(-1);
+}
+
+.decor-social-a {
+  inset-inline-start: 4%;
+  inset-block-start: 8%;
+}
+
+.decor-social-b {
+  inset-inline-end: 6%;
+  inset-block-end: 12%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decor-shape {
+    transform: perspective(600px) var(--tilt, none);
+  }
+
+  [dir="rtl"] .decor-graph {
+    transform: perspective(600px) var(--tilt, none) scaleX(-1);
+  }
 }
 
 h1 {
   font-size: 1.75rem;
   line-height: 1.25;
-  margin: 0 0 16px;
+  margin-block: 0 16px;
 }
 
 h2 {
   font-size: 1.4rem;
   line-height: 1.3;
-  margin: 0 0 20px;
+  margin-block: 0 20px;
 }
 
 .lede {
   font-size: 1.05rem;
-  color: #444;
-  margin: 0 0 24px;
+  color: var(--color-text-secondary);
+  margin-block: 0 24px;
 }
 
-/* --- Part 2: proof section --- */
+/* --- Part 2: video portfolio --- */
 
-.proof-grid {
+.portfolio-grid {
   display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
   gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: 20px;
+  margin-inline: -20px;
+  padding-block-end: 4px; /* room for scrollbar on desktop touchpads */
 }
 
-.proof-card {
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  padding: 20px;
-  background: #fafafa;
+.portfolio-card {
+  scroll-snap-align: start;
 }
 
-.proof-quote {
-  margin: 0 0 8px;
-  font-size: 1rem;
-}
-
-.proof-attribution {
+.portfolio-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: none;
+  padding: 0;
   margin: 0;
-  font-size: 0.875rem;
-  color: #666;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;
+}
+
+.portfolio-poster-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio-poster-placeholder .placeholder-bg {
+  fill: var(--color-bg-card);
+}
+
+.portfolio-poster-placeholder .placeholder-border {
+  stroke: var(--color-border);
+}
+
+.portfolio-play-icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 48px;
+  height: 48px;
+}
+
+.portfolio-play-icon .play-bg {
+  fill: var(--color-accent);
+}
+
+.portfolio-play-icon .play-glyph {
+  fill: var(--color-bg);
+}
+
+.portfolio-meta {
+  margin-block-start: 10px;
+}
+
+.portfolio-title {
+  font-size: 1rem;
+  margin-block: 0 4px;
+}
+
+.portfolio-client {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-block: 0 4px;
+}
+
+.portfolio-result {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-block: 0;
+}
+
+/* --- Video lightbox --- */
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.video-lightbox[hidden] {
+  display: none;
+}
+
+.video-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 13, 15, 0.9);
+}
+
+.video-lightbox-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+}
+
+.video-lightbox-video {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  background: var(--color-bg-card);
+}
+
+.video-lightbox-close {
+  position: absolute;
+  inset-block-start: -44px;
+  inset-inline-end: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 /* --- Part 3: CTA + form --- */
 
 .cta {
-  background: #f5f5f5;
+  background: var(--color-bg-card);
 }
 
 #lead-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 24px;
+  margin-block-start: 24px;
 }
 
 .field {
@@ -96,28 +281,37 @@ h2 {
   font-size: 1rem;
   padding: 12px 14px;
   min-height: 44px; /* touch target */
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   width: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.field input[dir="ltr"] {
+  text-align: left;
 }
 
 .field input:focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-accent);
   outline-offset: 1px;
 }
 
 .field-error {
   font-size: 0.8rem;
-  color: #c0392b;
+  color: var(--color-accent-hover);
   min-height: 1em;
 }
 
 /* Honeypot: visually hidden, not display:none — present in the DOM/a11y
-   tree (marked aria-hidden) but off-screen and unreachable by tab order. */
+   tree (marked aria-hidden) but off-screen and unreachable by tab order.
+   Uses logical inset properties so it stays off-screen regardless of
+   writing direction. */
 .hp-field-wrap {
   position: absolute;
-  left: -9999px;
-  top: -9999px;
+  inset-inline-start: -9999px;
+  inset-block-start: -9999px;
   width: 1px;
   height: 1px;
   overflow: hidden;
@@ -130,42 +324,43 @@ h2 {
   min-height: 48px; /* touch target */
   border: none;
   border-radius: 6px;
-  background: #2563eb;
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-bg);
   cursor: pointer;
+  font-family: inherit;
 }
 
 #submit-btn:disabled {
-  background: #93b4f0;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 .form-status {
   min-height: 1.2em;
   font-size: 0.9rem;
-  margin: 4px 0 0;
+  margin-block: 4px 0;
 }
 
 .form-status[data-state="error"] {
-  color: #c0392b;
+  color: var(--color-accent-hover);
 }
 
 .form-status[data-state="success"] {
-  color: #1a7f37;
+  color: var(--color-accent);
   font-weight: 600;
 }
 
 .social-proof-strip {
-  margin-top: 28px;
+  margin-block-start: 28px;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--color-text-secondary);
   text-align: center;
 }
 
 /* --- Wider viewports --- */
 @media (min-width: 640px) {
   .section {
-    padding: 72px 0;
+    padding-block: 72px;
   }
 
   h1 {
@@ -176,7 +371,11 @@ h2 {
     font-size: 1.75rem;
   }
 
-  .proof-grid {
+  .portfolio-grid {
+    grid-auto-flow: unset;
     grid-template-columns: repeat(3, 1fr);
+    overflow-x: visible;
+    margin-inline: 0;
+    padding-inline: 0;
   }
 }
