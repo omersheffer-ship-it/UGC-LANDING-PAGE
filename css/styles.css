@@ -43,6 +43,19 @@ body {
   padding-block: 48px;
 }
 
+/* Screen-reader-only utility: visually removed but still readable by AT. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --- Decorative 3D-style background layer ---
    Purely ambient: low-opacity, pointer-events:none, sits behind the
    content layer (.container is z-index:1, this is z-index:0). CSS-only
@@ -253,6 +266,109 @@ h2 {
   cursor: pointer;
 }
 
+/* --- Part 2.5: ROAS proof cards ---
+   Deliberately light/white, mimicking a real Meta Ads Manager row —
+   do NOT restyle with --color-bg/--color-bg-card, that would defeat
+   the "authentic screenshot" effect. Mobile-first: base styles below
+   are the horizontal swipeable strip; the >=1440px override further
+   down detaches each card to a fixed viewport-margin position. */
+
+.proof-cards-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 68%;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: 20px;
+  padding-block-end: 4px; /* room for scrollbar on desktop touchpads */
+}
+
+.proof-card {
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 1px solid #dadde1;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1c1e21;
+}
+
+.proof-card-chrome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.proof-card-chrome input[type="checkbox"] {
+  margin: 0;
+}
+
+.proof-toggle {
+  display: inline-block;
+  width: 24px;
+  height: 14px;
+  border-radius: 7px;
+  background: #1877f2;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.proof-toggle::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 2px;
+  inset-block-start: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.proof-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #cbd2e0, #9aa5b8);
+  filter: blur(4px);
+}
+
+.proof-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proof-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 0;
+}
+
+.proof-metrics > div {
+  min-width: 0;
+}
+
+.proof-metrics dt {
+  font-size: 0.65rem;
+  color: #8a8d91;
+  white-space: nowrap;
+}
+
+.proof-metrics dd {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-bottom: 1px dotted #8a8d91;
+  white-space: nowrap;
+}
+
 /* --- Part 3: CTA + form --- */
 
 .cta {
@@ -317,5 +433,52 @@ h2 {
     overflow-x: visible;
     margin-inline: 0;
     padding-inline: 0;
+  }
+}
+
+/* --- Wide desktop: detach proof cards into fixed side margins ---
+   Gated on height too, so cards never place themselves off-screen on
+   short/laptop windows. 1440px leaves >=240px of margin outside the
+   960px-wide portfolio container, comfortably clearing the 220px
+   card width without ever overlapping centered page content. */
+@media (min-width: 1440px) and (min-height: 700px) {
+  .proof-cards .container {
+    display: none;
+  }
+
+  .proof-cards-strip {
+    overflow: visible;
+  }
+
+  .proof-card {
+    display: block;
+    position: fixed;
+    width: 220px;
+    z-index: 5;
+  }
+
+  .proof-cards-strip .proof-card:nth-child(1) {
+    inset-inline-start: 16px;
+    top: 10%;
+  }
+
+  .proof-cards-strip .proof-card:nth-child(2) {
+    inset-inline-end: 16px;
+    top: 24%;
+  }
+
+  .proof-cards-strip .proof-card:nth-child(3) {
+    inset-inline-start: 16px;
+    top: 44%;
+  }
+
+  .proof-cards-strip .proof-card:nth-child(4) {
+    inset-inline-end: 16px;
+    top: 60%;
+  }
+
+  .proof-cards-strip .proof-card:nth-child(5) {
+    inset-inline-start: 16px;
+    top: 78%;
   }
 }
