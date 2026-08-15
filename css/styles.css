@@ -56,6 +56,119 @@ body {
   border: 0;
 }
 
+/* --- Header / logo ---
+   Slim, non-sticky, no nav (single-page site) — short enough that it
+   never competes with the hero <h1> for prominence. The lockup is a
+   fixed-order unit (camera left, wordmark center, mic right) that
+   does not mirror in RTL: real coordinates set via SVG x/text-anchor,
+   not CSS logical properties, so page direction can't flip it. */
+.site-header {
+  padding-block: 12px;
+  text-align: center;
+}
+
+.site-logo {
+  height: 40px;
+  width: auto;
+  color: var(--color-accent); /* stroke color for camera/mic, via currentColor */
+  /* Fixed LTR-flow unit — without this, text-anchor/x on the wordmark
+     <text> elements resolve against the inherited RTL base direction
+     from <html dir="rtl"> and land in the wrong place. Hebrew runs
+     inside the wordmark still bidi-reorder correctly on their own;
+     this only pins where the anchors themselves resolve. */
+  direction: ltr;
+}
+
+.logo-name {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 26px;
+  fill: var(--color-text);
+  text-anchor: end;
+}
+
+.logo-pipe {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 22px;
+  fill: var(--color-accent);
+  text-anchor: middle;
+}
+
+.logo-tagline {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 15px;
+  fill: var(--color-text-secondary);
+  text-anchor: start;
+}
+
+.logo-quote {
+  font-family: var(--font-primary);
+  font-size: 34px;
+  fill: var(--color-text-secondary);
+  opacity: 0.15;
+}
+
+.logo-wave-bar {
+  fill: var(--color-accent);
+}
+
+.logo-rec-dot {
+  fill: var(--color-accent-hover);
+}
+
+.logo-rec-ring {
+  stroke: var(--color-accent-hover);
+  opacity: 0.5;
+}
+
+.logo-rec-text {
+  font-family: var(--font-primary);
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--color-accent-hover);
+}
+
+/* Small phones: drop the tagline half of the wordmark, keep the name
+   + both icons. The name's x and the mic group's translate shift left
+   to close the gap left by the hidden tagline/pipe, rather than
+   leaving dead space in the middle of the lockup. */
+@media (max-width: 420px) {
+  .site-logo {
+    height: 34px;
+  }
+
+  .logo-pipe,
+  .logo-tagline {
+    display: none;
+  }
+
+  .logo-name {
+    x: 300px;
+  }
+
+  .logo-quote {
+    x: 308px;
+  }
+
+  .logo-wave-bar:nth-of-type(1) {
+    x: 326px;
+  }
+
+  .logo-wave-bar:nth-of-type(2) {
+    x: 334px;
+  }
+
+  .logo-wave-bar:nth-of-type(3) {
+    x: 342px;
+  }
+
+  .logo-mic {
+    transform: translate(350px, 10px) scale(0.58);
+  }
+}
+
 /* --- Decorative 3D-style background layer ---
    Purely ambient: low-opacity, pointer-events:none, sits behind the
    content layer (.container is z-index:1, this is z-index:0). CSS-only
@@ -205,13 +318,6 @@ h2 {
   font-size: 0.85rem;
   color: var(--color-text-secondary);
   margin-block: 0 4px;
-}
-
-.portfolio-result {
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  margin-block: 0;
 }
 
 /* --- Video lightbox --- */

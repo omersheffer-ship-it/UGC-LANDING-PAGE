@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TODO: שם/מותג — סרטוני UGC שמספרים סיפור, לא מוכרים</title>
+<title>דניאל — סרטוני UGC שמספרים סיפור, לא מוכרים</title>
 <meta name="description" content="סרטוני UGC ופרסומות שמרגישות אמיתיות, לא כמו פרסומת. תראו דוגמאות מהעבודה ותשאירו פרטים אם זה מתאים לכם.">
 <link rel="icon" href="assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +12,52 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+<!-- ============================================================
+     HEADER — logo lockup only, no nav (single-page site). Fixed
+     LTR-style icon order (camera left, mic right) regardless of the
+     page's overall RTL direction — the lockup is a fixed unit and
+     doesn't mirror. Camera reuses the #hook decor layer's wireframe
+     camera shape (same rect/circle/circle/rect), with new offset-edge
+     lines and a REC dot added for the logo specifically.
+     ============================================================ -->
+<header class="site-header">
+  <svg class="site-logo" viewBox="0 0 640 80" role="img" aria-label="דניאל | UGC + ראיונות רחוב">
+    <g class="logo-camera" transform="translate(4,8) scale(0.62)">
+      <!-- 3D offset edge (drawn first, sits behind the main body) -->
+      <rect x="18" y="22" width="70" height="45" rx="6" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+      <line x1="10" y1="30" x2="18" y2="22" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+      <line x1="10" y1="75" x2="18" y2="67" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+      <!-- base camera silhouette, reused from .decor-camera -->
+      <rect x="10" y="30" width="70" height="45" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="45" cy="52" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="45" cy="52" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <rect x="55" y="18" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <!-- REC indicator -->
+      <circle class="logo-rec-ring" cx="16" cy="26" r="6" fill="none"/>
+      <circle class="logo-rec-dot" cx="16" cy="26" r="3"/>
+      <text class="logo-rec-text" x="24" y="29">REC</text>
+    </g>
+
+    <text class="logo-name" x="515" y="46">דניאל</text>
+    <text class="logo-pipe" x="430" y="46">|</text>
+    <text class="logo-tagline" x="95" y="46">UGC + ראיונות רחוב</text>
+
+    <text class="logo-quote" x="518" y="40">&#8221;</text>
+    <rect class="logo-wave-bar" x="536" y="30" width="4" height="20" rx="2"/>
+    <rect class="logo-wave-bar" x="544" y="20" width="4" height="40" rx="2"/>
+    <rect class="logo-wave-bar" x="552" y="25" width="4" height="30" rx="2"/>
+
+    <g class="logo-mic" transform="translate(560,10) scale(0.58)">
+      <g transform="rotate(-8 50 50)">
+        <rect x="35" y="8" width="30" height="42" rx="15" fill="none" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M22,44 A28,28 0 0 0 78,44" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="50" y1="72" x2="50" y2="88" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="34" y1="88" x2="66" y2="88" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
+</header>
 
 <!-- ============================================================
      PART 1 — Personal connection / trust-building opening hook
@@ -60,7 +106,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-1.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-1.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 1">
+                aria-label="הפעל וידאו – רילס לאינסטגרם">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -73,7 +119,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">רילס לאינסטגרם</h3>
           <p class="portfolio-client">מותג אופנה</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
 
@@ -81,7 +126,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-2.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-2.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 2">
+                aria-label="הפעל וידאו – סרטון UGC למוצר טיפוח">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -94,7 +139,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">סרטון UGC למוצר טיפוח</h3>
           <p class="portfolio-client">טיפוח ויופי</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
 
@@ -102,7 +146,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-3.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-3.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 3">
+                aria-label="הפעל וידאו – פרסומת קצרה לטיקטוק">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -115,7 +159,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">פרסומת קצרה לטיקטוק</h3>
           <p class="portfolio-client">מזון ומשקאות</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
 
@@ -123,7 +166,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-4.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-4.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 4">
+                aria-label="הפעל וידאו – וידאו המלצה אישית">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -136,7 +179,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">וידאו המלצה אישית</h3>
           <p class="portfolio-client">אפליקציה או שירות דיגיטלי</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
 
@@ -144,7 +186,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-5.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-5.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 5">
+                aria-label="הפעל וידאו – תוכן רילס להשקת מוצר">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -157,7 +199,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">תוכן רילס להשקת מוצר</h3>
           <p class="portfolio-client">כושר ובריאות</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
 
@@ -165,7 +206,7 @@
         <button type="button" class="portfolio-play"
                 data-video-src="https://media.TODO-r2-domain.example/TODO-object-key-6.mp4"
                 data-video-poster="assets/images/portfolio/TODO-poster-6.jpg"
-                aria-label="הפעל וידאו – TODO: שם לקוח 6">
+                aria-label="הפעל וידאו – פתיח קצר לקמפיין ממומן">
           <svg class="portfolio-poster-placeholder" viewBox="0 0 180 320" aria-hidden="true" focusable="false">
             <rect class="placeholder-bg" width="180" height="320" />
             <rect class="placeholder-border" x="1" y="1" width="178" height="318" fill="none" stroke-width="2" />
@@ -178,7 +219,6 @@
         <div class="portfolio-meta">
           <h3 class="portfolio-title">פתיח קצר לקמפיין ממומן</h3>
           <p class="portfolio-client">מוצרים לבית</p>
-          <p class="portfolio-result">TODO: תוצאה או מדד אמיתי, אם קיים</p>
         </div>
       </article>
     </div>
@@ -322,7 +362,7 @@
     </a>
 
     <div class="social-proof-strip">
-      הצטרפו אל TODO: [מספר] מותגים שכבר עבדו איתי
+      הצטרפו אל מעל 100 לקוחות מרוצים
     </div>
   </div>
 </section>
