@@ -259,65 +259,11 @@ h2 {
   background: var(--color-bg-card);
 }
 
-#lead-form {
+.whatsapp-cta-btn {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-block-start: 24px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field label {
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.field input {
-  font-size: 1rem;
-  padding: 12px 14px;
-  min-height: 44px; /* touch target */
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: inherit;
-}
-
-.field input[dir="ltr"] {
-  text-align: left;
-}
-
-.field input:focus {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 1px;
-}
-
-.field-error {
-  font-size: 0.8rem;
-  color: var(--color-accent-hover);
-  min-height: 1em;
-}
-
-/* Honeypot: visually hidden, not display:none — present in the DOM/a11y
-   tree (marked aria-hidden) but off-screen and unreachable by tab order.
-   Uses logical inset properties so it stays off-screen regardless of
-   writing direction. */
-.hp-field-wrap {
-  position: absolute;
-  inset-inline-start: -9999px;
-  inset-block-start: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-#submit-btn {
   font-size: 1.05rem;
   font-weight: 600;
   padding: 14px 20px;
@@ -328,26 +274,20 @@ h2 {
   color: var(--color-bg);
   cursor: pointer;
   font-family: inherit;
+  text-decoration: none;
+  margin-block-start: 24px;
+  box-sizing: border-box;
 }
 
-#submit-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
+.whatsapp-cta-btn:hover,
+.whatsapp-cta-btn:focus-visible {
+  background: var(--color-accent-hover);
+  color: var(--color-bg);
 }
 
-.form-status {
-  min-height: 1.2em;
-  font-size: 0.9rem;
-  margin-block: 4px 0;
-}
-
-.form-status[data-state="error"] {
-  color: var(--color-accent-hover);
-}
-
-.form-status[data-state="success"] {
-  color: var(--color-accent);
-  font-weight: 600;
+.whatsapp-cta-btn:focus-visible {
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 2px;
 }
 
 .social-proof-strip {

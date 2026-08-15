@@ -186,7 +186,7 @@
 </section>
 
 <!-- ============================================================
-     PART 3 — Soft CTA + social proof + lead capture form
+     PART 3 — Soft CTA + social proof + WhatsApp button
      ============================================================ -->
 <section class="section cta" id="cta">
   <div class="decor-layer" aria-hidden="true">
@@ -205,41 +205,17 @@
     </div>
   </div>
   <div class="container">
-    <h2>בוא נראה אם זה מתאים</h2>
-    <p class="lede">אין כאן מכירה קשה. תשאירו פרטים, נדבר קצר, ונבין ביחד אם יש התאמה.</p>
+    <h2>בוא נדבר ישירות</h2>
+    <p class="lede">בלי טפסים ארוכים. תכתבו לי בוואטסאפ, נדבר קצר, ונבין ביחד אם יש התאמה.</p>
 
-    <form id="lead-form" novalidate>
-
-      <div class="field">
-        <label for="name">שם</label>
-        <input type="text" id="name" name="name" autocomplete="name" required>
-        <span class="field-error" data-error-for="name"></span>
-      </div>
-
-      <div class="field">
-        <label for="phone">טלפון</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" dir="ltr" required>
-        <span class="field-error" data-error-for="phone"></span>
-      </div>
-
-      <div class="field">
-        <label for="email">אימייל</label>
-        <input type="email" id="email" name="email" autocomplete="email" dir="ltr" required>
-        <span class="field-error" data-error-for="email"></span>
-      </div>
-
-      <!-- Honeypot field: hidden from real users, left for bots to fill in.
-           Visually hidden (not display:none) so crude bots that skip
-           display:none fields still fall for it. -->
-      <div class="hp-field-wrap" aria-hidden="true">
-        <label for="company">חברה</label>
-        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
-      </div>
-
-      <button type="submit" id="submit-btn">בוא נדבר</button>
-    </form>
-
-    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    <a
+      class="whatsapp-cta-btn"
+      href="https://wa.me/972586900439?text=%D7%94%D7%99%D7%99%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%93%D7%A3%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93"
+      target="_blank"
+      rel="noopener"
+    >
+      דברו איתי בוואטסאפ
+    </a>
 
     <div class="social-proof-strip">
       הצטרפו אל TODO: [מספר] מותגים שכבר עבדו איתי
@@ -257,8 +233,6 @@
   </div>
 </div>
 
-<script src="js/config.js"></script>
-<script type="module" src="js/form.js"></script>
 <script defer src="js/portfolio.js"></script>
 <script defer src="js/decor.js"></script>
 </body>
