@@ -391,8 +391,30 @@ h2 {
   gap: 8px;
 }
 
-.proof-card-chrome input[type="checkbox"] {
-  margin: 0;
+/* Custom-drawn checked checkbox — a native <input type="checkbox">
+   renders with the visitor's own OS/browser widget theme, which never
+   matches Meta's actual flat custom checkbox and is the fastest way
+   to break the "real screenshot" illusion. */
+.proof-checkbox {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: #1877f2;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.proof-checkbox::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 4px;
+  inset-block-start: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .proof-toggle {
@@ -421,7 +443,13 @@ h2 {
   height: 22px;
   border-radius: 3px;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #cbd2e0, #9aa5b8);
+  /* Layered gradients (a warm off-center blob over a cooler
+     multi-stop base) give the blur believable tonal variation —
+     a flat 2-stop gradient just blurs into a flatter gradient,
+     it doesn't read as an out-of-focus photo. */
+  background:
+    radial-gradient(circle at 35% 30%, #e3b98f 0%, #e3b98f 25%, transparent 55%),
+    linear-gradient(135deg, #cbd2e0 0%, #9aa5b8 40%, #7c8ba3 70%, #5b6b85 100%);
   filter: blur(4px);
 }
 
@@ -448,13 +476,16 @@ h2 {
   font-size: 0.65rem;
   color: #8a8d91;
   white-space: nowrap;
+  /* Real Meta Ads Manager puts the dotted hover-tooltip underline on
+     the metric label, not the value — this was backwards before. */
+  border-bottom: 1px dotted #8a8d91;
+  padding-bottom: 1px;
 }
 
 .proof-metrics dd {
   margin: 2px 0 0;
   font-size: 0.85rem;
   font-weight: 600;
-  border-bottom: 1px dotted #8a8d91;
   white-space: nowrap;
 }
 
