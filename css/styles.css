@@ -515,64 +515,104 @@ h2 {
   white-space: nowrap;
 }
 
-/* --- Part 2.75: promo graphic ---
-   Blurred photo lives on ::before (not the element's own background)
-   so the blur filter never touches the text sitting on top of it.
-   Explicit ascending z-index on every layer avoids relying on
-   pseudo-element paint-order nuances. */
-.promo-graphic {
+/* --- Part 2.75: promo cards ---
+   Two 9:16 Reels/Stories-format cards. Card 1's face-blur is two
+   identically-cropped <img> layers (not a background-image trick)
+   so clip-path can target just her face; card 2's photo is never
+   touched by any filter — legibility comes from a separate pill. */
+.promo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.promo-card {
   position: relative;
+  margin: 0;
   border-radius: 10px;
   overflow: hidden;
-  min-height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--color-bg-card);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
-.promo-graphic::before {
-  content: "";
-  position: absolute;
-  inset: -10px; /* overscan so the blur's edge softening never reveals a sharp boundary */
-  z-index: 0;
-  background: url("../assets/images/promo/daniel-interview.png") center 20% / cover no-repeat;
-  filter: blur(6px);
-  transform: scale(1.05);
+.promo-media {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
 }
 
-.promo-graphic .decor-layer {
-  z-index: 1;
-}
-
-.promo-graphic::after {
-  content: "";
+.promo-photo {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background: linear-gradient(180deg, rgba(13, 13, 15, 0.55), rgba(13, 13, 15, 0.85));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.promo-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 32px;
+/* Second layer, same source image, cropped identically (so it stays
+   pixel-aligned with the base layer) — clip-path punches an
+   ellipse-shaped window onto a fully-blurred copy of the photo,
+   obscuring only her face. filter runs before clip-path per spec, so
+   the blur samples the whole image, not a pre-clipped sliver. */
+.promo-photo-blur {
+  clip-path: ellipse(11% 9% at 83% 47%);
+  filter: blur(14px);
 }
 
-.promo-badge {
-  margin: 0 0 8px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--color-accent);
-  text-transform: uppercase;
+.promo-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    rgba(13, 13, 15, 0.55) 78%,
+    rgba(13, 13, 15, 0.88) 100%
+  );
+  pointer-events: none;
 }
 
-.promo-message {
+.promo-caption {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 1;
   margin: 0;
-  font-size: 1.6rem;
+  text-align: center;
+  padding: 16px 12px 18px;
+}
+
+.promo-caption--pill {
+  inset-block-end: 16px;
+  width: fit-content;
+  margin-inline: auto;
+  background: rgba(13, 13, 15, 0.82);
+  border-radius: 14px;
+  padding: 10px 24px;
+}
+
+.promo-price {
+  margin: 0 0 2px;
+  font-size: 1.9rem;
   font-weight: 900;
+  color: var(--color-accent);
+}
+
+.promo-label {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--color-text);
+}
+
+@media (min-width: 640px) {
+  .promo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .promo-price {
+    font-size: 2.1rem;
+  }
 }
 
 /* --- Part 3: CTA + form --- */

@@ -353,30 +353,43 @@
 </section>
 
 <!-- ============================================================
-     PART 2.75 — Promo graphic: real photo, blurred + gradient
-     overlay, reusing the discount headline from the marquee (not
-     duplicating the pricing list, which stays exclusively in #cta
-     as accessible plain text — see plan reasoning). Sits right
-     before the CTA so a real, warm human photo reinforces "real
-     person, act now" at the conversion point.
+     PART 2.75 — Two 9:16 (Reels/Stories-format) promo cards, real
+     photos, price-focused. Card 1 (street interview): the
+     interviewee's face is obscured via a second, identically-cropped
+     <img> layer clipped to an ellipse over just her face and blurred
+     — the rest of the photo (including Daniel) stays fully sharp.
+     Card 2 (UGC video): photo is completely untouched; legibility
+     comes from a separate pill layer behind the text, not a photo
+     edit. Sits right before the CTA so real, concrete price+result
+     pairs reinforce "real person, real offer, act now."
      ============================================================ -->
 <section class="section promo" id="promo">
   <div class="container">
-    <div class="promo-graphic">
-      <div class="decor-layer" aria-hidden="true">
-        <div class="decor-shape decor-camera" style="--tilt: rotateY(-15deg);">
-          <svg viewBox="0 0 100 100" width="180" height="180">
-            <rect x="10" y="30" width="70" height="45" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="45" cy="52" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="45" cy="52" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="55" y="18" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
+    <h2>שני פורמטים לבחירה</h2>
+    <p class="lede">כל אחד מהם מגיע עם מחיר קבוע, בלי הפתעות.</p>
+
+    <div class="promo-grid">
+      <figure class="promo-card">
+        <div class="promo-media">
+          <img class="promo-photo" src="assets/images/promo/daniel-interview.png" alt="דניאל מראיין ברחוב">
+          <img class="promo-photo promo-photo-blur" src="assets/images/promo/daniel-interview.png" alt="" aria-hidden="true">
+          <div class="promo-fade" aria-hidden="true"></div>
         </div>
-      </div>
-      <div class="promo-content">
-        <p class="promo-badge">מבצע לזמן מוגבל</p>
-        <p class="promo-message">25% הנחה עד ה-15 בספטמבר</p>
-      </div>
+        <figcaption class="promo-caption">
+          <p class="promo-price">800 ₪</p>
+          <p class="promo-label">ראיון רחוב</p>
+        </figcaption>
+      </figure>
+
+      <figure class="promo-card">
+        <div class="promo-media">
+          <img class="promo-photo" src="assets/images/promo/ugc-video-photo.jpg" alt="דניאל מצלם סרטון UGC">
+        </div>
+        <figcaption class="promo-caption promo-caption--pill">
+          <p class="promo-price">400 ₪</p>
+          <p class="promo-label">סרטון UGC</p>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
